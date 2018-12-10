@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitHelper", "GitHelper.csproj", "{5A8E054C-B61B-498E-968F-E0BB62B4B4EC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UTest", "tests\UTest\UTest.csproj", "{148ED869-093A-42FA-AA18-4BEC232FFFA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5A8E054C-B61B-498E-968F-E0BB62B4B4EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A8E054C-B61B-498E-968F-E0BB62B4B4EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A8E054C-B61B-498E-968F-E0BB62B4B4EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148ED869-093A-42FA-AA18-4BEC232FFFA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148ED869-093A-42FA-AA18-4BEC232FFFA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148ED869-093A-42FA-AA18-4BEC232FFFA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148ED869-093A-42FA-AA18-4BEC232FFFA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

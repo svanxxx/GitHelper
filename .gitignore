@@ -1,3 +1,5 @@
 /.vs/GitHelper/v15/*
 /bin/Debug/*
 /obj/Debug/*
+/tests/UTest/obj/*
+/tests/UTest/bin/Debug/*
