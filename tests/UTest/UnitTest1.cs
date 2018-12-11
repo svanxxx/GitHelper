@@ -1,5 +1,7 @@
 ﻿using GitHelper;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace UTest
 {
@@ -34,6 +36,17 @@ namespace UTest
 			if (b.TTID != 123)
 			{
 				Assert.Fail("invalid process of branch text");
+			}
+		}
+		[TestMethod]
+		public void TestCommits()
+		{
+			Git g = new Git(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
+			Branch b = g.GetBranch("master");
+			List<Commit> ls = b.EnumCommits(1, 2);
+			if (ls.Count != 2)
+			{
+				Assert.Fail("Cannot enumerate commits!");
 			}
 		}
 	}

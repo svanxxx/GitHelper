@@ -35,10 +35,8 @@ namespace GitHelper
 				return -1;
 			}
 		}
-		public Branch(Git git)
-		{
-			_git = git;
-		}
+		public Branch() { }
+		public Branch(Git git) { _git = git; }
 		public List<Commit> EnumCommits(int from, int to)
 		{
 			if (_git == null)
@@ -48,7 +46,7 @@ namespace GitHelper
 			List<Commit> ls = new List<Commit>();
 			Commit com = null;
 			string command = NAME == "master" ? "log -100" : string.Format(@"log master..{0}", NAME);
-			
+
 			foreach (string line in _git.RunCommand(command + @" --date=format:""%Y.%m.%d %H:%M"""))
 			{
 				if (line.StartsWith("commit"))

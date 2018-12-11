@@ -10,10 +10,6 @@ namespace GitHelper
 		public Git(string path)
 		{
 			_path = path;
-			if (System.IO.Directory.Exists(_path))
-			{
-				throw new Exception("Cannot start git. Invalid directory.");
-			}
 		}
 		public void SetCredentials(string user, string email)
 		{
@@ -155,7 +151,7 @@ namespace GitHelper
 		}
 		public Branch GetBranch(string branch)
 		{
-			return new Branch(this);
+			return new Branch(this){NAME = branch};
 		}
 	}
 }
