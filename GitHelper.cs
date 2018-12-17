@@ -66,9 +66,8 @@ namespace GitHelper
 		{
 			return RunCommand("diff HEAD^ HEAD");
 		}
-		public List<string> DiffFriendOutput()
+		static public List<string> DiffFriendOutput(List<string> res)
 		{
-			List<string> res = Diff();
 			List<string> processed = new List<string>();
 			for (int i = 0; i < res.Count; i++)
 			{

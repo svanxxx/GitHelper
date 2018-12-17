@@ -41,7 +41,7 @@ namespace GitHelper
 		{
 			if (_git == null)
 			{
-				throw new Exception("Git is not specified.");
+				throw new Exception("Git is not initialized.");
 			}
 			List<Commit> ls = new List<Commit>();
 			Commit com = null;
@@ -55,7 +55,7 @@ namespace GitHelper
 					{
 						ls.Add(com);
 					}
-					com = new Commit();
+					com = new Commit(_git);
 					com.COMMIT = line.Remove(0, 7);
 					com.NOTES = "";
 				}
