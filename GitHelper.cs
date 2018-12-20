@@ -160,5 +160,9 @@ namespace GitHelper
 		{
 			return new Commit(this) { COMMIT = commit };
 		}
+		public Commit GetTopCommit()
+		{
+			return new Commit(this) { COMMIT = RunCommand("rev-parse HEAD")[0] };
+		}
 	}
 }

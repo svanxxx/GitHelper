@@ -73,5 +73,13 @@ namespace UTest
 				Assert.Fail("Cannot enumerate commits!");
 			}
 		}
+		[TestMethod]
+		public void TestTopCommit()
+		{
+			if (git.GetTopCommit().EnumFiles().Count < 1)
+			{
+				Assert.Fail("Cannot enumerate files in top commit!");
+			}
+		}
 	}
 }
