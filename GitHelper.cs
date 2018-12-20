@@ -57,7 +57,7 @@ namespace GitHelper
 				List<string> ls = new List<string>();
 				foreach (var line in ps.Invoke())
 				{
-					ls.Add(line.ToString().Trim());
+					ls.Add(line.ToString());
 				}
 				return ls;
 			}
@@ -71,21 +71,25 @@ namespace GitHelper
 			List<string> processed = new List<string>();
 			for (int i = 0; i < res.Count; i++)
 			{
-				string s = res[i];
-				string color = "white";
+				string s = res[i].Replace("<", "&lt;").Replace(">", "&gt;").Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+				string style = "";
 				string pre = "";
 				string pos = "";
 				if (s.StartsWith("+"))
 				{
-					color = "#00800047";
+					style = " style='background-color:#00800047;'";
 				}
 				else if (s.StartsWith("-"))
 				{
-					color = "#ff000036";
+					style = " style='background-color:#ff000036;'";
+				}
+				else if (s.StartsWith("@@"))
+				{
+					style = " style='background-color:#80808042;'";
 				}
 				else if (s.StartsWith("fatal"))
 				{
-					color = "red";
+					style = " style='background-color:red;'";
 				}
 				else if (s.StartsWith("+++ b"))
 				{
@@ -101,7 +105,7 @@ namespace GitHelper
 					pre = "<b>";
 					pos = "</b>";
 				}
-				processed.Add(string.Format("<div style='background-color:{0};'>{2}{1}{3}</div>", color, s, pre, pos));
+				processed.Add(string.Format("<div{0}>{2}{1}{3}</div>", style, s, pre, pos));
 			}
 			return processed;
 		}
@@ -151,6 +155,10 @@ namespace GitHelper
 		public Branch GetBranch(string branch)
 		{
 			return new Branch(this){NAME = branch};
+		}
+		public Commit GetCommit(string commit)
+		{
+			return new Commit(this) { COMMIT = commit };
 		}
 	}
 }

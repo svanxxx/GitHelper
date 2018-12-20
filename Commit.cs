@@ -68,7 +68,20 @@ namespace GitHelper
 				return AUTHOR.Substring(sta + 1, end - sta - 1).Trim();
 			}
 		}
-
+		public List<ChangedFile> EnumFiles()
+		{
+			if (_git == null)
+			{
+				throw new Exception("Git is not initialized.");
+			}
+			List<ChangedFile> ls = new List<ChangedFile>();
+			string command = "show --pretty='' --name-only " + COMMIT;
+			foreach (string line in _git.RunCommand(command))
+			{
+				ls.Add(new ChangedFile(_git, COMMIT, line.Trim()));
+			}
+			return ls;
+		}
 		public List<string> Diff()
 		{
 			if (_git == null)

@@ -97,7 +97,7 @@ namespace GitHelper
 		{
 			if (_git == null)
 			{
-				throw new Exception("Git is not specified.");
+				throw new Exception("Git is not initialized.");
 			}
 			List<ChangedFile> ls = new List<ChangedFile>();
 			string command = "diff --name-status {0} master";

@@ -8,6 +8,13 @@ namespace UTest
 	[TestClass]
 	public class GitTest
 	{
+		Git git
+		{
+			get
+			{
+				return new Git(AppDomain.CurrentDomain.SetupInformation.ApplicationBase + "\\..\\..\\..\\..\\");
+			}
+		}
 		[TestMethod]
 		public void TestBranchTT()
 		{
@@ -39,10 +46,27 @@ namespace UTest
 			}
 		}
 		[TestMethod]
+		public void TestCommitFiles()
+		{
+			Commit c = git.GetCommit("74af98c8b7bad77364e46965f68a9ccbf4c0dd6c");
+			if (c.EnumFiles().Count != 4)
+			{
+				Assert.Fail("Cannot enumerate files in commit!");
+			}
+		}
+		[TestMethod]
+		public void TestCommitFileDiff()
+		{
+			Commit c = git.GetCommit("74af98c8b7bad77364e46965f68a9ccbf4c0dd6c");
+			if (Git.DiffFriendOutput(c.EnumFiles()[0].Diff).Count != 18)
+			{
+				Assert.Fail("Cannot get file history!");
+			}
+		}
+		[TestMethod]
 		public void TestCommits()
 		{
-			Git g = new Git(AppDomain.CurrentDomain.SetupInformation.ApplicationBase);
-			Branch b = g.GetBranch("master");
+			Branch b = git.GetBranch("master");
 			List<Commit> ls = b.EnumCommits(1, 2);
 			if (ls.Count != 2)
 			{
