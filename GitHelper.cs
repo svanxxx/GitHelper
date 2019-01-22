@@ -28,6 +28,10 @@ namespace GitHelper
 		{
 			return RunCommand("fetch--prune origin \"+refs/tags/*:refs/tags/*\"");
 		}
+		public List<string> FetchAll()
+		{
+			return RunCommand("fetch --all");
+		}
 		public List<string> PullOrigin()
 		{
 			return RunCommand("pull origin");
