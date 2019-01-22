@@ -81,5 +81,13 @@ namespace UTest
 				Assert.Fail("Cannot enumerate files in top commit!");
 			}
 		}
+		[TestMethod]
+		public void CurrentBranch()
+		{
+			if (git.CurrentBranch() != "master")
+			{
+				Assert.Fail("current branch verification failed!");
+			}
+		}
 	}
 }

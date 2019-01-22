@@ -40,6 +40,10 @@ namespace GitHelper
 		{
 			return RunCommand("push origin HEAD");
 		}
+		public string CurrentBranch()
+		{
+			return RunCommand("rev-parse --abbrev-ref HEAD")[0];
+		}
 		public List<string> PushTags()
 		{
 			return RunCommand("push --tags");
