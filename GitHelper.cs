@@ -44,6 +44,18 @@ namespace GitHelper
 		{
 			return RunCommand("rev-parse --abbrev-ref HEAD")[0];
 		}
+		public List<string> AddFile(string file)
+		{
+			return RunCommand(string.Format("add -f \"{0}\"", file));
+		}
+		public List<string> CommitAll(string message, string author)
+		{
+			return RunCommand(string.Format("commit --all --message=\"{0}\" --author=\"{1}\"", message, author));
+		}
+		public List<string> PushCurrentBranch()
+		{
+			return RunCommand(string.Format("push origin refs/heads/{0}:refs/heads/{0}", CurrentBranch()));
+		}
 		public List<string> PushTags()
 		{
 			return RunCommand("push --tags");
