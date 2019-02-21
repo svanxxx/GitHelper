@@ -55,6 +55,20 @@ namespace UTest
 			}
 		}
 		[TestMethod]
+		public void BranchTopCommit()
+		{
+			Branch c = git.GetBranch("test");
+			if (c.TopCommit() != "2cb52cad2468f8c18f5baa85ce6443e837df7db1")
+			{
+				Assert.Fail("Cannot get top commit!");
+			}
+			c = git.GetBranch("doesnotexist");
+			if (c.TopCommit() != "")
+			{
+				Assert.Fail("Cannot chekc branch existence!");
+			}
+		}
+		[TestMethod]
 		public void TestCommitFileDiff()
 		{
 			Commit c = git.GetCommit("74af98c8b7bad77364e46965f68a9ccbf4c0dd6c");

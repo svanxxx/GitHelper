@@ -93,19 +93,22 @@ namespace GitHelper
 			int ito = Math.Min(ls.Count - ifrom, to - from + 1);
 			return ls.GetRange(ifrom, ito);
 		}
-		public List<ChangedFile> EnumFiles()
+		public string TopCommit()
 		{
 			if (_git == null)
 			{
 				throw new Exception("Git is not initialized.");
 			}
-			List<ChangedFile> ls = new List<ChangedFile>();
-			string command = "diff --name-status {0} master";
+			string command = $"rev-parse --verify {NAME}";
 			foreach (string line in _git.RunCommand(command))
 			{
-				ls.Add(new ChangedFile(line.Trim()));
+				if (line.ToUpper().Contains("FATAL"))
+				{
+					return "";
+				}
+				return line;
 			}
-			return ls;
+			return "";
 		}
 	}
 }
