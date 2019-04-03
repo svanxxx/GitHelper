@@ -3,3 +3,5 @@
 /obj/Debug/*
 /tests/UTest/obj/*
 /tests/UTest/bin/Debug/*
+/bin/Release/*
+/obj/Release/*
