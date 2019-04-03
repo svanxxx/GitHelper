@@ -26,7 +26,7 @@ namespace GitHelper
 		}
 		public List<string> CleanaupLocalTags()
 		{
-			return RunCommand("fetch--prune origin \"+refs/tags/*:refs/tags/*\"");
+			return RunCommand("fetch --prune origin \"+refs/tags/*:refs/tags/*\"");
 		}
 		public List<string> AddTag(string tag)
 		{
