@@ -103,5 +103,30 @@ namespace UTest
 				Assert.Fail("current branch verification failed!");
 			}
 		}
+		[TestMethod]
+		public void Tags()
+		{
+			git.DeleteAllTags();
+			if (git.EnumTags().Count > 0)
+			{
+				Assert.Fail("tag is not created");
+			}
+			git.AddTag("testtag1");
+			git.AddTag("testtag2");
+			List<GitTag> tags = git.EnumTags();
+			if (tags[0].NAME != "testtag1")
+			{
+				Assert.Fail("tag is not created");
+			}
+			if (tags[1].NAME != "testtag2")
+			{
+				Assert.Fail("tag is not created");
+			}
+			git.DeleteAllTags();
+			if (git.EnumTags().Count > 0)
+			{
+				Assert.Fail("tag is not created");
+			}
+		}
 	}
 }

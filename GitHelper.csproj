@@ -49,6 +49,7 @@
     <Compile Include="ChangedFile.cs" />
     <Compile Include="Commit.cs" />
     <Compile Include="GitHelper.cs" />
+    <Compile Include="GitTag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

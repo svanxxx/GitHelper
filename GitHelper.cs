@@ -28,6 +28,27 @@ namespace GitHelper
 		{
 			return RunCommand("fetch--prune origin \"+refs/tags/*:refs/tags/*\"");
 		}
+		public List<string> AddTag(string tag)
+		{
+			return RunCommand($"tag {tag}");
+		}
+		public List<GitTag> EnumTags()
+		{
+			List<GitTag> tags = new List<GitTag>();
+			foreach (string t in RunCommand("tag"))
+			{
+				tags.Add(new GitTag(t));
+			}
+			return tags;
+		}
+		public List<string> DeleteAllTags()
+		{
+			return RunCommand("tag | foreach-object -process { git.exe tag -d $_ }");
+		}
+		public List<string> PushTags()
+		{
+			return RunCommand("push --tags");
+		}
 		public List<string> FetchAll()
 		{
 			return RunCommand("fetch --all");
@@ -55,10 +76,6 @@ namespace GitHelper
 		public List<string> PushCurrentBranch()
 		{
 			return RunCommand(string.Format("push origin refs/heads/{0}:refs/heads/{0}", CurrentBranch()));
-		}
-		public List<string> PushTags()
-		{
-			return RunCommand("push --tags");
 		}
 		public List<string> Rebase(string barnch)
 		{
