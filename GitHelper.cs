@@ -108,17 +108,25 @@ namespace GitHelper
 			List<string> processed = new List<string>();
 			for (int i = 0; i < res.Count; i++)
 			{
-				string s = res[i].Replace("<", "&lt;").Replace(">", "&gt;").Replace("\t", "&nbsp;&nbsp;&nbsp;&nbsp;");
+				string s = res[i].Replace("<", "&lt;").Replace(">", "&gt;");
 				string style = "";
 				string pre = "";
 				string pos = "";
+				if (s.StartsWith("+++ b"))
+				{
+					continue;
+				}
+				else if (s.StartsWith("--- a"))
+				{
+					continue;
+				}
 				if (s.StartsWith("+"))
 				{
-					style = " style='background-color:#00800047;'";
+					style = " style='background-color:#dfd;'";
 				}
 				else if (s.StartsWith("-"))
 				{
-					style = " style='background-color:#ff000036;'";
+					style = " style='background-color:#fdd;'";
 				}
 				else if (s.StartsWith("@@"))
 				{
@@ -128,24 +136,17 @@ namespace GitHelper
 				{
 					style = " style='background-color:red;'";
 				}
-				else if (s.StartsWith("+++ b"))
-				{
-					continue;
-				}
-				else if (s.StartsWith("--- a"))
-				{
-					continue;
-				}
 				else if (s.StartsWith("diff --git a"))
 				{
 					s = "<hr>" + s.Replace("diff --git a", "").Split(new string[] { "b/" }, StringSplitOptions.RemoveEmptyEntries)[0];
 					pre = "<b>";
 					pos = "</b>";
 				}
-				processed.Add(string.Format("<div{0}>{2}{1}{3}</div>", style, s, pre, pos));
+				processed.Add(string.Format("<span{0}>{2}{1}{3}</span>", style, s, pre, pos));
 			}
 			return processed;
 		}
+
 		static object _lock = new object();
 		static DateTime _loadtime = DateTime.Now;
 		static List<Branch> _branches = new List<Branch>();
