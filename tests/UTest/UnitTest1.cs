@@ -57,13 +57,17 @@ namespace UTest
 		[TestMethod]
 		public void BranchTopCommit()
 		{
-			Branch c = git.GetBranch("test");
-			if (c.TopCommit() != "2cb52cad2468f8c18f5baa85ce6443e837df7db1")
+			Branch b = git.GetBranch("test(2)-abc");
+			if (b.TopCommit() != "2cb52cad2468f8c18f5baa85ce6443e837df7db1")
 			{
 				Assert.Fail("Cannot get top commit!");
 			}
-			c = git.GetBranch("doesnotexist");
-			if (c.TopCommit() != "")
+			if (b.EnumCommits(1, 100).Count != 1)
+			{
+				Assert.Fail("Cannot enum commits of specific branch!");
+			}
+			b = git.GetBranch("doesnotexist");
+			if (b.TopCommit() != "")
 			{
 				Assert.Fail("Cannot chekc branch existence!");
 			}

@@ -5,3 +5,4 @@
 /tests/UTest/bin/Debug/*
 /bin/Release/*
 /obj/Release/*
+/tests/UTest/bin/Release

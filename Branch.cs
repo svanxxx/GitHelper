@@ -45,7 +45,7 @@ namespace GitHelper
 			}
 			List<Commit> ls = new List<Commit>();
 			Commit com = null;
-			string command = NAME == "master" ? "log -100" : string.Format(@"log master..{0}", NAME);
+			string command = NAME == "master" ? "log -100" : string.Format(@"log master..'{0}'", NAME);
 
 			foreach (string line in _git.RunCommand(command + @" --date=format:""%Y.%m.%d %H:%M"""))
 			{
@@ -99,7 +99,7 @@ namespace GitHelper
 			{
 				throw new Exception("Git is not initialized.");
 			}
-			string command = $"rev-parse --verify {NAME}";
+			string command = $"rev-parse --verify '{NAME}'";
 			foreach (string line in _git.RunCommand(command))
 			{
 				if (line.ToUpper().Contains("FATAL"))
