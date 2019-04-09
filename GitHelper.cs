@@ -188,7 +188,7 @@ namespace GitHelper
 		}
 		public void DeleteBranch(string branch)
 		{
-			RunCommand(string.Format("branch -D {0}", branch));
+			RunCommand($"branch -D '{branch}'");
 		}
 		public Branch GetBranch(string branch)
 		{
