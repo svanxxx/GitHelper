@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Management.Automation;
 
@@ -158,13 +159,22 @@ namespace GitHelper
 				{
 					_branches.Clear();
 					_loadtime = DateTime.Now;
-					foreach (string line in RunCommand(@"for-each-ref --format=""%(committerdate) %09 %(authorname) %09 %(refname) %09 %(authoremail)"" --sort=-committerdate"))
+					foreach (string line in RunCommand(@"for-each-ref --format=""%(committerdate:iso8601) %09 %(authorname) %09 %(refname:short) %09 %(authoremail) %09 %(objectname)"" --sort=-committerdate"))
 					{
 						string[] sep = new string[] { "\t" };
 						string[] pars = line.Split(sep, StringSplitOptions.RemoveEmptyEntries);
-						if (pars.Length == 4)
+						if (pars.Length == 5)
 						{
-							_branches.Add(new Branch(this) { DATE = pars[0].Trim(), AUTHOR = pars[1].Trim(), NAME = pars[2].Trim().Split('/')[2], AUTHOREML = pars[3].Trim('>', '<', ' ', '\t') });
+							string dt = pars[0].Trim();
+							DateTime dtime = string.IsNullOrEmpty(dt) ? default(DateTime) : DateTime.Parse(dt);
+							_branches.Add(new Branch(this)
+							{
+								DATE = dtime.ToString(),
+								AUTHOR = pars[1].Trim(),
+								NAME = pars[2].Trim(),
+								AUTHOREML = pars[3].Trim('>', '<', ' ', '\t'),
+								HASH = pars[4].Trim(),
+							});
 						}
 					}
 				}
@@ -192,7 +202,7 @@ namespace GitHelper
 		}
 		public Branch GetBranch(string branch)
 		{
-			return new Branch(this){NAME = branch};
+			return new Branch(this) { NAME = branch };
 		}
 		public Commit GetCommit(string commit)
 		{
