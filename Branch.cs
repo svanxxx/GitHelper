@@ -78,7 +78,7 @@ namespace GitHelper
 				{
 					if (com != null)
 					{
-						com.NOTES = string.IsNullOrEmpty(com.NOTES) ? line : (com.NOTES + Environment.NewLine + line);
+						com.NOTES = string.IsNullOrEmpty(com.NOTES) ? line.Trim() : (com.NOTES + Environment.NewLine + line);
 					}
 				}
 			}
