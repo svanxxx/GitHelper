@@ -11,6 +11,7 @@ namespace GitHelper
 		public string NAME { get; set; }
 		public string AUTHOR { get; set; }
 		public string AUTHOREML { get; set; }
+		public string HASH { get; set; }
 		public string COLOR
 		{
 			set { }
@@ -77,7 +78,7 @@ namespace GitHelper
 				{
 					if (com != null)
 					{
-						com.NOTES = string.IsNullOrEmpty(com.NOTES) ? line : (com.NOTES + Environment.NewLine + line);
+						com.NOTES = string.IsNullOrEmpty(com.NOTES) ? line.Trim() : (com.NOTES + Environment.NewLine + line);
 					}
 				}
 			}

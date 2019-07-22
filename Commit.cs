@@ -26,16 +26,20 @@ namespace GitHelper
 				return NOTES;
 			}
 		}
-		public string TTID
+		public int TTID
 		{
+			set { }
 			get
 			{
-				string n = NOTES.ToUpper();
-				if (n.StartsWith("TT"))
+				if (NOTES.StartsWith("TT"))
 				{
-					return Regex.Match(n, "TT[0-9]+").Value.Replace("TT", "");
+					string s = Regex.Match(NOTES, "TT[0-9]+").Value.Replace("TT", "");
+					if (int.TryParse(s, out int i))
+					{
+						return i;
+					}
 				}
-				return "00000";
+				return -1;
 			}
 		}
 		public string AUTHORNAME
