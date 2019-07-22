@@ -103,6 +103,21 @@ namespace UTest
 		public void CurrentBranch()
 		{
 			if (git.CurrentBranch() != "master")
+			{	
+				Assert.Fail("current branch verification failed!");
+			}
+		}
+		[TestMethod]
+		public void ManageBranches()
+		{
+			git.AddBranch("test");
+			if (git.CurrentBranch() != "test")
+			{
+				Assert.Fail("current branch verification failed!");
+			}
+			git.Checkout("master");
+			git.DeleteBranch("test");
+			if (git.CurrentBranch() != "master")
 			{
 				Assert.Fail("current branch verification failed!");
 			}

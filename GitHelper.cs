@@ -79,11 +79,15 @@ namespace GitHelper
 		}
 		public List<string> Rebase(string barnch)
 		{
-			return RunCommand("rebase " + barnch);
+			return RunCommand($"rebase \"{barnch}\"");
 		}
 		public List<string> Checkout(string barnch)
 		{
-			return RunCommand("checkout " + barnch);
+			return RunCommand($"checkout \"{barnch}\"");
+		}
+		public List<string> AddBranch(string barnch)
+		{
+			return RunCommand($"checkout -b \"{barnch}\"");
 		}
 		public List<string> RunCommand(string command)
 		{
