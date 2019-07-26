@@ -38,17 +38,12 @@ namespace GitHelper
 		}
 		public Branch() { }
 		public Branch(Git git) { _git = git; }
-		public List<Commit> EnumCommits(int from, int to)
+		List<Commit> CommitsFromCommand(string command)
 		{
-			if (_git == null)
-			{
-				throw new Exception("Git is not initialized.");
-			}
 			List<Commit> ls = new List<Commit>();
 			Commit com = null;
-			string command = NAME == "master" ? "log -100" : string.Format(@"log master..'{0}'", NAME);
 
-			foreach (string line in _git.RunCommand(command + @" --date=format:""%Y.%m.%d %H:%M"""))
+			foreach (string line in _git.RunCommand(command))
 			{
 				if (line.StartsWith("commit"))
 				{
@@ -86,6 +81,16 @@ namespace GitHelper
 			{
 				ls.Add(com);
 			}
+			return ls;
+		}
+		public List<Commit> EnumCommits(int from, int to)
+		{
+			if (_git == null)
+			{
+				throw new Exception("Git is not initialized.");
+			}
+			string command = NAME == "master" ? "log -100" : string.Format(@"log master..'{0}'", NAME);
+			List<Commit> ls = CommitsFromCommand(command + @" --date=format:""%Y.%m.%d %H:%M""");
 			if (from > ls.Count)
 			{
 				return new List<Commit>();
@@ -93,6 +98,15 @@ namespace GitHelper
 			int ifrom = Math.Min(ls.Count - 1, from - 1);
 			int ito = Math.Min(ls.Count - ifrom, to - from + 1);
 			return ls.GetRange(ifrom, ito);
+		}
+		public List<Commit> QueryCommits(string pattern)
+		{
+			if (_git == null)
+			{
+				throw new Exception("Git is not initialized.");
+			}
+			List<Commit> ls = CommitsFromCommand($"log -100 --grep='{pattern}'" + @" --date=format:""%Y.%m.%d %H:%M""");
+			return ls;
 		}
 		public string TopCommit()
 		{

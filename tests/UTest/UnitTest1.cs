@@ -92,6 +92,20 @@ namespace UTest
 			}
 		}
 		[TestMethod]
+		public void TestCommitsQuery()
+		{
+			Branch b = git.GetBranch("master");
+			List<Commit> ls = b.QueryCommits("top commit.");
+			if (ls.Count != 1)
+			{
+				Assert.Fail("Cannot query commits!");
+			}
+			if (ls[0].COMMIT != "446b810523a592c86ed75594e93ee8e1098d6808")
+			{
+				Assert.Fail("Cannot verify commit during query!");
+			}
+		}
+		[TestMethod]
 		public void TestTopCommit()
 		{
 			if (git.GetTopCommit().EnumFiles().Count < 1)
