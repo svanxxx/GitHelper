@@ -42,6 +42,10 @@ namespace GitHelper
 				return -1;
 			}
 		}
+		public string TTSUMMARY
+		{
+			get; set;
+		}
 		public string AUTHORNAME
 		{
 			get

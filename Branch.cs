@@ -83,6 +83,15 @@ namespace GitHelper
 			}
 			return ls;
 		}
+		public List<Commit> TodayCommits()
+		{
+			if (_git == null)
+			{
+				throw new Exception("Git is not initialized.");
+			}
+			List<Commit> ls = CommitsFromCommand($"log {NAME} --since=am");
+			return ls;
+		}
 		public List<Commit> EnumCommits(int from, int to)
 		{
 			if (_git == null)

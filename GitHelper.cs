@@ -42,6 +42,14 @@ namespace GitHelper
 			}
 			return tags;
 		}
+		public GitTag LastTag()
+		{
+			foreach (string t in RunCommand("describe --tags --abbrev=0"))
+			{
+				return new GitTag(t);
+			}
+			return new GitTag("");
+		}
 		public List<string> DeleteAllTags()
 		{
 			return RunCommand("tag | foreach-object -process { git.exe tag -d $_ }");
@@ -78,17 +86,17 @@ namespace GitHelper
 		{
 			return RunCommand(string.Format("push origin refs/heads/{0}:refs/heads/{0}", CurrentBranch()));
 		}
-		public List<string> Rebase(string barnch)
+		public List<string> Rebase(string branch)
 		{
-			return RunCommand($"rebase \"{barnch}\"");
+			return RunCommand($"rebase \"{branch}\"");
 		}
-		public List<string> Checkout(string barnch)
+		public List<string> Checkout(string branch)
 		{
-			return RunCommand($"checkout \"{barnch}\"");
+			return RunCommand($"checkout \"{branch}\"");
 		}
-		public List<string> AddBranch(string barnch)
+		public List<string> AddBranch(string branch)
 		{
-			return RunCommand($"checkout -b \"{barnch}\"");
+			return RunCommand($"checkout -b \"{branch}\"");
 		}
 		public List<string> RunCommand(string command)
 		{
@@ -202,7 +210,7 @@ namespace GitHelper
 		}
 		public void DeleteBranch(string branch)
 		{
-			RunCommand($"branch -D '{branch}'");
+			RunCommand($"branch -D \"{branch}\"");
 		}
 		public Branch GetBranch(string branch)
 		{
