@@ -43,6 +43,7 @@ namespace GitHelper
 			List<Commit> ls = new List<Commit>();
 			Commit com = null;
 
+			command += " --pretty=fuller";
 			foreach (string line in _git.RunCommand(command))
 			{
 				if (line.StartsWith("commit"))
@@ -62,14 +63,14 @@ namespace GitHelper
 						com.AUTHOR = line.Remove(0, 8);
 					}
 				}
-				else if (line.StartsWith("Date:   "))
+				else if (line.Contains("CommitDate:"))
 				{
 					if (com != null)
 					{
-						com.DATE = line.Remove(0, 8);
+						com.DATE = line.Split(new string[] { "CommitDate:" }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
 					}
 				}
-				else if (!string.IsNullOrEmpty(line))
+				else if (!string.IsNullOrEmpty(line) && line.StartsWith(" "))
 				{
 					if (com != null)
 					{
