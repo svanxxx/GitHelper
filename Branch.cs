@@ -56,6 +56,10 @@ namespace GitHelper
 					com.COMMIT = line.Remove(0, 7);
 					com.NOTES = "";
 				}
+				else if (line.StartsWith("AuthorDate: "))
+				{
+					com.AUTHOR_DATE = line.Split(new string[] { "AuthorDate:" }, StringSplitOptions.RemoveEmptyEntries)[0].Trim();
+				}
 				else if (line.StartsWith("Author: "))
 				{
 					if (com != null)

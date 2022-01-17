@@ -9,6 +9,7 @@ namespace GitHelper
 		Git _git;
 		public string COMMIT { get; set; }
 		public string AUTHOR { get; set; }
+		public string AUTHOR_DATE { get; set; }
 		public string DATE { get; set; }
 		public string NOTES { get; set; }
 		public string NOTESFXD
